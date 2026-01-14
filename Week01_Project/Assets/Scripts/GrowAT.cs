@@ -8,9 +8,13 @@ namespace NodeCanvas.Tasks.Actions {
 	[Description("An Action Task for making a gameObject grow using scale")]
 	public class GrowAT : ActionTask {
 
+		public float increase;
+		public GameObject lizard;
+
 		//Use for initialization. This is called only once in the lifetime of the task.
 		//Return null if init was successfull. Return an error string otherwise
 		protected override string OnInit() {
+
 			return null;
 		}
 
@@ -19,13 +23,13 @@ namespace NodeCanvas.Tasks.Actions {
 		//EndAction can be called from anywhere.
 		protected override void OnExecute() {
 
-            agent.transform.localScale = new Vector3(2f, 2f, 2f);
+            //agent.transform.localScale = new Vector3(2f, 2f, 2f);
             
         }
 
 		//Called once per frame while the action is active.
 		protected override void OnUpdate() {
-            
+            agent.transform.localScale = new Vector3(lizard.transform.localScale.x + increase, lizard.transform.localScale.y + increase, lizard.transform.localScale.z + increase);
         }
 
 		//Called when the task is disabled.
