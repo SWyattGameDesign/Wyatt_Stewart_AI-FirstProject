@@ -2,12 +2,14 @@ using NodeCanvas.Framework;
 using ParadoxNotion.Design;
 using UnityEngine;
 
+
 namespace NodeCanvas.Tasks.Actions {
 
-	public class SetLuminosityAT : ActionTask {
+	public class RepairAT : ActionTask {
+		public BBParameter<Transform> workpadTransform;
+		public float rateOfChange;
 
-		public Light lightHouseLight;
-		public float luminosity;
+		private Blackboard lighthouseBlackboard;
 
 		//Use for initialization. This is called only once in the lifetime of the task.
 		//Return null if init was successfull. Return an error string otherwise
@@ -19,13 +21,24 @@ namespace NodeCanvas.Tasks.Actions {
 		//Call EndAction() to mark the action as finished, either in success or failure.
 		//EndAction can be called from anywhere.
 		protected override void OnExecute() {
-			lightHouseLight.intensity = luminosity;
-			EndAction(true);
+			lighthouseBlackboard = workpadTransform.value.GetComponentInParent<Blackboard>();
+			
 		}
 
 		//Called once per frame while the action is active.
 		protected override void OnUpdate() {
-			
+			float repairValue = lighthouseBlackboard.GetVariableValue<float>("repairValue");
+			repairValue += rateOfChange * Time.deltaTime;
+
+			lighthouseBlackboard.SetVariableValue("repairValue",repairValue);
+
+			float repairThreshold = lighthouseBlackboard.GetVariableValue<float>("activeThreshold");
+
+			if (repairThreshold < repairValue) 
+			{
+				EndAction(true);
+			}
+
 		}
 
 		//Called when the task is disabled.

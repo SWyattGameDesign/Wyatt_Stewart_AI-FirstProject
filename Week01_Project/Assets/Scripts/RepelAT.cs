@@ -31,7 +31,6 @@ namespace NodeCanvas.Tasks.Actions {
         protected override void OnUpdate()
         {
 
-
             Vector3 directionToBot = valuebotObject.value.transform.position - agent.transform.position;
             agent.transform.position -= directionToBot.normalized * speed.value * Time.deltaTime;
             

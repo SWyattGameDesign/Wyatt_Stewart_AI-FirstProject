@@ -11,7 +11,7 @@ namespace NodeCanvas.Tasks.Actions
     public class ApproachAT : ActionTask
     {
 
-        public Transform targetTransform;
+        public BBParameter<Transform> targetTransform;
 
         public BBParameter<float> speed;
 
@@ -40,7 +40,7 @@ namespace NodeCanvas.Tasks.Actions
         {
             //Move the object towards the target Transform
 
-            Vector3 directionToMove = targetTransform.position - agent.transform.position;
+            Vector3 directionToMove = targetTransform.value.position - agent.transform.position;
 
             agent.transform.position += directionToMove.normalized * speed.value * Time.deltaTime;
 
