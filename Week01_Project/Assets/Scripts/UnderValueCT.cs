@@ -8,7 +8,7 @@ namespace NodeCanvas.Tasks.Conditions
     public class UnderValueCT : ConditionTask
     {
 
-        public BBParameter<float> currentValue;
+        public BBParameter<float> value;
         public float threshold;
 
 
@@ -35,7 +35,7 @@ namespace NodeCanvas.Tasks.Conditions
         //Return whether the condition is success or failure.
         protected override bool OnCheck()
         {
-            bool isUnderThreshold = currentValue.value < threshold;
+            bool isUnderThreshold = value.value < threshold;
             return isUnderThreshold;
         }
     }

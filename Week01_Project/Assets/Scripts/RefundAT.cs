@@ -5,14 +5,12 @@ using UnityEngine;
 
 namespace NodeCanvas.Tasks.Actions {
 
-	public class DrainAT : ActionTask {
+	public class RefundAT : ActionTask {
 
-		public GameObject valuebot;
-		public BBParameter<float> value;
-		public Transform[] targetTransforms;
+		
+        public BBParameter<float> value;
+		public Transform bankTransform;
 		public BBParameter<float> speed;
-		private int i = 0;
-		private Color colorValue;
 
         //Use for initialization. This is called only once in the lifetime of the task.
         //Return null if init was successfull. Return an error string otherwise
@@ -24,33 +22,20 @@ namespace NodeCanvas.Tasks.Actions {
 		//Call EndAction() to mark the action as finished, either in success or failure.
 		//EndAction can be called from anywhere.
 		protected override void OnExecute() {
-			colorValue = valuebot.GetComponent<Renderer>().material.color;
+			
 		}
 
 		//Called once per frame while the action is active.
 		protected override void OnUpdate() {
+			Vector3 directionToMove = bankTransform.position - agent.transform.position;
+			agent.transform.position += directionToMove.normalized * speed.value * Time.deltaTime;
 
-			if( i <= 2f){ 
-				var currentTarget = targetTransforms[i];
-                Debug.Log("i is now " + i);
-                Vector3 directionToTarget = targetTransforms[i].position - agent.transform.position;
-				agent.transform.position += directionToTarget.normalized * speed.value * Time.deltaTime;
-
-				float distanceToTargets = directionToTarget.magnitude;
-
-				if (distanceToTargets < 0.5f)
-				{
-					i++;
-					if(i == 3)
-					{
-						i = 0;
-					}				
-					
-				}
+			float distanceToTarget = directionToMove.magnitude;
+			if (distanceToTarget < 0.25 && value.value < 100)
+			{
+				value.value += 30f * Time.deltaTime;
 			}
 
-			value.value -= 10f * Time.deltaTime;
-			
 		}
 
 		//Called when the task is disabled.
