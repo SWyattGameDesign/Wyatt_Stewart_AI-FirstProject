@@ -11,6 +11,7 @@ namespace NodeCanvas.Tasks.Actions {
         public BBParameter<float> value;
 		public Transform bankTransform;
 		public BBParameter<float> speed;
+		public BBParameter<GameObject> repelled;
 
         //Use for initialization. This is called only once in the lifetime of the task.
         //Return null if init was successfull. Return an error string otherwise
@@ -36,7 +37,11 @@ namespace NodeCanvas.Tasks.Actions {
 				value.value += 30f * Time.deltaTime;
 			}
 
-		}
+            Blackboard repelledBlackboard = repelled.value.GetComponent<Blackboard>();
+            float currentValue = repelledBlackboard.GetVariableValue<float>("value");
+            currentValue = value.value;
+            repelledBlackboard.SetVariableValue("value", currentValue);
+        }
 
 		//Called when the task is disabled.
 		protected override void OnStop() {
