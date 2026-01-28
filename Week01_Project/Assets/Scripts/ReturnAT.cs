@@ -25,7 +25,7 @@ namespace NodeCanvas.Tasks.Actions {
 
             
             newTime = Random.Range(30f, 120f);
-            time.value = newTime;
+            
 
         }
 
@@ -34,13 +34,14 @@ namespace NodeCanvas.Tasks.Actions {
 		{
 
             remainingTime.value.SetActive(true);
+			EndAction(true);
             		
 
 		}
 
 		//Called when the task is disabled.
 		protected override void OnStop() {
-            
+            time.value = newTime;
         }
 
 		//Called when the task is paused.

@@ -45,7 +45,7 @@ namespace NodeCanvas.Tasks.Actions
             agent.transform.position += directionToMove.normalized * speed.value * Time.deltaTime;
 
             float distanceToTarget = directionToMove.magnitude;
-            if (distanceToTarget < 1f)
+            if (distanceToTarget < 3f)
             {
                 EndAction(true);
             }
