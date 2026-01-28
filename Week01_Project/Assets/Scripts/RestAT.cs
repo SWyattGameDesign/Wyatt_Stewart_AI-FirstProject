@@ -27,8 +27,8 @@ namespace NodeCanvas.Tasks.Actions {
 
 		//Called once per frame while the action is active.
 		protected override void OnUpdate() {
-			stress.value -= 10 * Time.deltaTime;
-			if (stress.value <= 0 )
+			stress.value -= Time.deltaTime;
+			if (stress.value <= 0f )
 			{
 				EndAction(true);
 			}
@@ -36,7 +36,8 @@ namespace NodeCanvas.Tasks.Actions {
 
 		//Called when the task is disabled.
 		protected override void OnStop() {
-			
+			breakCam.value.gameObject.SetActive (false);
+			mainCam.value.gameObject.SetActive(true);
 		}
 
 		//Called when the task is paused.
