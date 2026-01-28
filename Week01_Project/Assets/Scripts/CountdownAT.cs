@@ -34,7 +34,7 @@ namespace NodeCanvas.Tasks.Actions {
             float minutesF = Mathf.FloorToInt(remainingTime / 60);
             float secondsF = Mathf.FloorToInt(remainingTime % 60);
 
-            if (remainingTime - Time.deltaTime >= 0)
+            if (remainingTime - Time.deltaTime > 0.00000000000000f)
 			{
 				remainingTimeText.gameObject.SetActive(true);
 				remainingTime -= Time.deltaTime;
@@ -47,6 +47,7 @@ namespace NodeCanvas.Tasks.Actions {
 			Minutes.text = minutesF.ToString("0");
             Seconds.text = secondsF.ToString("00");
             remainingTimeText.text = minutesF.ToString() + ":" + secondsF.ToString("00");
+			time.value = remainingTime;
         }
 
 		//Called when the task is disabled.
