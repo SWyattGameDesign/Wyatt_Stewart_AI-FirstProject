@@ -2555,7 +2555,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 236.23}
+  m_AnchoredPosition: {x: 0, y: 178.13}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1705365584
@@ -2611,7 +2611,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 2
+  m_fontStyle: 3
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
   m_textAlignment: 65535
@@ -3193,7 +3193,7 @@ MonoBehaviour:
     UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]]"}}}'
   _objectReferences:
   - {fileID: 0}
-  - {fileID: 806605293}
+  - {fileID: 1183728488}
   - {fileID: 718037830}
   - {fileID: 2124101992}
   - {fileID: 1705365582}
@@ -3211,7 +3211,7 @@ MonoBehaviour:
       UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]]"}'
     _references:
     - {fileID: 0}
-    - {fileID: 806605293}
+    - {fileID: 1183728488}
   - _json: '{"_value":1,"_name":"mainCam","_id":"8d475d49-efe5-46a7-b219-b187687ea278","$type":"NodeCanvas.Framework.Variable`1[[UnityEngine.Camera,
       UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]]"}'
     _references:
@@ -3240,11 +3240,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _serializedExposedParameters: []
-  _boundGraphSerialization: '{"type":"NodeCanvas.StateMachines.FSM","nodes":[{"_actionList":{"executionMode":1,"actions":[{"targetTransform":{"_value":1},"speed":{"_name":"speed","_targetVariableID":"3a1e1d9f-54ed-4d7b-81a8-2f5c03349e57"},"$type":"NodeCanvas.Tasks.Actions.ApproachAT"}]},"_color":{"r":1.0,"g":0.42,"b":0.32,"a":1.0},"_name":"Approach","_position":{"x":483.3585,"y":435.6395},"_comment":"To
+  _boundGraphSerialization: '{"type":"NodeCanvas.StateMachines.FSM","nodes":[{"_actionList":{"executionMode":1,"actions":[{"targetTransform":{"_value":1},"speed":{"_name":"speed","_targetVariableID":"3a1e1d9f-54ed-4d7b-81a8-2f5c03349e57"},"$type":"NodeCanvas.Tasks.Actions.ApproachAT"}]},"_color":{"r":0.3215686,"g":0.3623804,"b":1.0,"a":1.0},"_name":"Approach","_position":{"x":483.3585,"y":435.6395},"_comment":"To
     conveyer belt","$type":"NodeCanvas.StateMachines.ActionState","$id":"0"},{"_actionList":{"executionMode":1,"actions":[{"stress":{"_name":"stress","_targetVariableID":"0ad24d22-d14d-4bb0-aed9-b8ae87910f07"},"$type":"NodeCanvas.Tasks.Actions.WorkAT"}]},"_color":{"r":1.0,"g":0.42,"b":0.32,"a":1.0},"_name":"Work","_position":{"x":678.6073,"y":569.1573},"_comment":"on
-    Conveyer","$type":"NodeCanvas.StateMachines.ActionState","$id":"1"},{"_actionList":{"executionMode":1,"actions":[{"targetTransform":{"_value":2},"speed":{"_name":"speed","_targetVariableID":"3a1e1d9f-54ed-4d7b-81a8-2f5c03349e57"},"$type":"NodeCanvas.Tasks.Actions.ApproachAT"}]},"_color":{"r":1.0,"g":0.42,"b":0.32,"a":1.0},"_name":"Approach","_position":{"x":533.3676,"y":720.3234},"_comment":"to
+    Conveyer","$type":"NodeCanvas.StateMachines.ActionState","$id":"1"},{"_actionList":{"executionMode":1,"actions":[{"targetTransform":{"_value":2},"speed":{"_name":"speed","_targetVariableID":"3a1e1d9f-54ed-4d7b-81a8-2f5c03349e57"},"$type":"NodeCanvas.Tasks.Actions.ApproachAT"}]},"_color":{"r":0.1702118,"g":0.1944126,"b":0.7075472,"a":1.0},"_name":"Approach","_position":{"x":533.3676,"y":720.3234},"_comment":"to
     Magnet","$type":"NodeCanvas.StateMachines.ActionState","$id":"2"},{"_actionList":{"executionMode":1,"actions":[{"stress":{"_name":"stress","_targetVariableID":"0ad24d22-d14d-4bb0-aed9-b8ae87910f07"},"$type":"NodeCanvas.Tasks.Actions.WorkAT"}]},"_color":{"r":1.0,"g":0.42,"b":0.32,"a":1.0},"_name":"Work","_position":{"x":360.7844,"y":611.2917},"_comment":"On
-    Magnet","$type":"NodeCanvas.StateMachines.ActionState","$id":"3"},{"_nestedFSM":{"_value":3},"exitMode":1,"_name":"Break","_position":{"x":1021.521,"y":458.2646},"$type":"NodeCanvas.StateMachines.NestedFSMState","$id":"4"},{"_conditionList":{"conditions":[]},"_actionList":{"executionMode":1,"actions":[{"time":{"_name":"time","_targetVariableID":"80d283fd-c521-4c33-9f7a-fec69392a5b3"},"remainingTimeText":4,"Minutes":5,"Seconds":6,"$type":"NodeCanvas.Tasks.Actions.CountdownAT"}]},"_position":{"x":726.8283,"y":341.0437},"$type":"NodeCanvas.StateMachines.OnFSMUpdate"}],"connections":[{"_sourceNode":{"$ref":"0"},"_targetNode":{"$ref":"1"},"$type":"NodeCanvas.StateMachines.FSMConnection"},{"_condition":{"value":{"_name":"time","_targetVariableID":"80d283fd-c521-4c33-9f7a-fec69392a5b3"},"threshold":1.0,"$type":"NodeCanvas.Tasks.Conditions.UnderValueCT"},"_sourceNode":{"$ref":"0"},"_targetNode":{"$ref":"4"},"$type":"NodeCanvas.StateMachines.FSMConnection"},{"_condition":{"waitDuration":5.0,"$type":"NodeCanvas.Tasks.Conditions.WaitCT"},"_sourceNode":{"$ref":"1"},"_targetNode":{"$ref":"2"},"$type":"NodeCanvas.StateMachines.FSMConnection"},{"_condition":{"value":{"_name":"time","_targetVariableID":"80d283fd-c521-4c33-9f7a-fec69392a5b3"},"threshold":1.0,"$type":"NodeCanvas.Tasks.Conditions.UnderValueCT"},"_sourceNode":{"$ref":"1"},"_targetNode":{"$ref":"4"},"$type":"NodeCanvas.StateMachines.FSMConnection"},{"_sourceNode":{"$ref":"2"},"_targetNode":{"$ref":"3"},"$type":"NodeCanvas.StateMachines.FSMConnection"},{"_condition":{"value":{"_name":"time","_targetVariableID":"80d283fd-c521-4c33-9f7a-fec69392a5b3"},"threshold":1.0,"$type":"NodeCanvas.Tasks.Conditions.UnderValueCT"},"_sourceNode":{"$ref":"2"},"_targetNode":{"$ref":"4"},"$type":"NodeCanvas.StateMachines.FSMConnection"},{"_condition":{"waitDuration":5.0,"$type":"NodeCanvas.Tasks.Conditions.WaitCT"},"_sourceNode":{"$ref":"3"},"_targetNode":{"$ref":"0"},"$type":"NodeCanvas.StateMachines.FSMConnection"},{"_condition":{"value":{"_name":"time","_targetVariableID":"80d283fd-c521-4c33-9f7a-fec69392a5b3"},"threshold":1.0,"$type":"NodeCanvas.Tasks.Conditions.UnderValueCT"},"_sourceNode":{"$ref":"3"},"_targetNode":{"$ref":"4"},"$type":"NodeCanvas.StateMachines.FSMConnection"},{"_condition":{"currentValue":{"_name":"time","_targetVariableID":"80d283fd-c521-4c33-9f7a-fec69392a5b3"},"threshold":10.0,"$type":"NodeCanvas.Tasks.Conditions.OverValueCT"},"_sourceNode":{"$ref":"4"},"_targetNode":{"$ref":"0"},"$type":"NodeCanvas.StateMachines.FSMConnection"}],"canvasGroups":[],"localBlackboard":{"_variables":{}}}'
+    Magnet","$type":"NodeCanvas.StateMachines.ActionState","$id":"3"},{"_nestedFSM":{"_value":3},"exitMode":1,"_name":"Break","_position":{"x":1020.215,"y":459.5709},"$type":"NodeCanvas.StateMachines.NestedFSMState","$id":"4"},{"_conditionList":{"conditions":[]},"_actionList":{"executionMode":1,"actions":[{"time":{"_name":"time","_targetVariableID":"80d283fd-c521-4c33-9f7a-fec69392a5b3"},"remainingTimeText":4,"Minutes":5,"Seconds":6,"$type":"NodeCanvas.Tasks.Actions.CountdownAT"}]},"_position":{"x":792.7904,"y":274.6811},"$type":"NodeCanvas.StateMachines.OnFSMUpdate"}],"connections":[{"_sourceNode":{"$ref":"0"},"_targetNode":{"$ref":"1"},"$type":"NodeCanvas.StateMachines.FSMConnection"},{"_condition":{"value":{"_name":"time","_targetVariableID":"80d283fd-c521-4c33-9f7a-fec69392a5b3"},"threshold":1.0,"$type":"NodeCanvas.Tasks.Conditions.UnderValueCT"},"_sourceNode":{"$ref":"0"},"_targetNode":{"$ref":"4"},"$type":"NodeCanvas.StateMachines.FSMConnection"},{"_condition":{"waitDuration":5.0,"$type":"NodeCanvas.Tasks.Conditions.WaitCT"},"_sourceNode":{"$ref":"1"},"_targetNode":{"$ref":"2"},"$type":"NodeCanvas.StateMachines.FSMConnection"},{"_condition":{"value":{"_name":"time","_targetVariableID":"80d283fd-c521-4c33-9f7a-fec69392a5b3"},"threshold":1.0,"$type":"NodeCanvas.Tasks.Conditions.UnderValueCT"},"_sourceNode":{"$ref":"1"},"_targetNode":{"$ref":"4"},"$type":"NodeCanvas.StateMachines.FSMConnection"},{"_sourceNode":{"$ref":"2"},"_targetNode":{"$ref":"3"},"$type":"NodeCanvas.StateMachines.FSMConnection"},{"_condition":{"value":{"_name":"time","_targetVariableID":"80d283fd-c521-4c33-9f7a-fec69392a5b3"},"threshold":1.0,"$type":"NodeCanvas.Tasks.Conditions.UnderValueCT"},"_sourceNode":{"$ref":"2"},"_targetNode":{"$ref":"4"},"$type":"NodeCanvas.StateMachines.FSMConnection"},{"_condition":{"waitDuration":5.0,"$type":"NodeCanvas.Tasks.Conditions.WaitCT"},"_sourceNode":{"$ref":"3"},"_targetNode":{"$ref":"0"},"$type":"NodeCanvas.StateMachines.FSMConnection"},{"_condition":{"value":{"_name":"time","_targetVariableID":"80d283fd-c521-4c33-9f7a-fec69392a5b3"},"threshold":1.0,"$type":"NodeCanvas.Tasks.Conditions.UnderValueCT"},"_sourceNode":{"$ref":"3"},"_targetNode":{"$ref":"4"},"$type":"NodeCanvas.StateMachines.FSMConnection"},{"_condition":{"currentValue":{"_name":"time","_targetVariableID":"80d283fd-c521-4c33-9f7a-fec69392a5b3"},"threshold":10.0,"$type":"NodeCanvas.Tasks.Conditions.OverValueCT"},"_sourceNode":{"$ref":"4"},"_targetNode":{"$ref":"0"},"$type":"NodeCanvas.StateMachines.FSMConnection"}],"canvasGroups":[],"localBlackboard":{"_variables":{}}}'
   _boundGraphObjectReferences:
   - {fileID: 0}
   - {fileID: 1462432790}
@@ -3257,8 +3257,8 @@ MonoBehaviour:
     _version: 3.33
     _category: 
     _comments: 
-    _translation: {x: 200.35838, y: -294.00272}
-    _zoomFactor: 0.78117627
+    _translation: {x: -272.39395, y: -191.38118}
+    _zoomFactor: 0.76553154
   _firstActivation: 0
   _enableAction: 0
   _disableAction: 0

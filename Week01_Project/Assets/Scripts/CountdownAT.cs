@@ -26,6 +26,7 @@ namespace NodeCanvas.Tasks.Actions {
 		//EndAction can be called from anywhere.
 		protected override void OnExecute() {
 			remainingTime = time.value;
+			remainingTimeText.gameObject.SetActive(true);
 		}
 
 		//Called once per frame while the action is active.
@@ -34,20 +35,20 @@ namespace NodeCanvas.Tasks.Actions {
             float minutesF = Mathf.FloorToInt(remainingTime / 60);
             float secondsF = Mathf.FloorToInt(remainingTime % 60);
 
-            if (remainingTime - Time.deltaTime > 0.00000000000000f)
+            if (remainingTime - Time.deltaTime > 0f)
 			{
-				remainingTimeText.gameObject.SetActive(true);
 				remainingTime -= Time.deltaTime;
 			} else
 			{
-				remainingTimeText.gameObject.SetActive(false);
-			}
+				remainingTime = 0f;
+                
+            }
 
 
 			Minutes.text = minutesF.ToString("0");
             Seconds.text = secondsF.ToString("00");
             remainingTimeText.text = minutesF.ToString() + ":" + secondsF.ToString("00");
-			time.value = remainingTime;
+            time.value = remainingTime;
         }
 
 		//Called when the task is disabled.

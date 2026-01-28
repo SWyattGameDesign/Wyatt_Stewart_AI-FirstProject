@@ -9,7 +9,7 @@ namespace NodeCanvas.Tasks.Actions {
 
 		public BBParameter<float> time;
 		public BBParameter<GameObject> remainingTime;
-		float newTime;
+		float newTime = 0f;
 
 
 		//Use for initialization. This is called only once in the lifetime of the task.
@@ -25,7 +25,9 @@ namespace NodeCanvas.Tasks.Actions {
 
             
             newTime = Random.Range(30f, 120f);
-            
+            time.value = newTime;
+			EndAction();
+
 
         }
 
@@ -33,15 +35,13 @@ namespace NodeCanvas.Tasks.Actions {
 		protected override void OnUpdate()
 		{
 
-            remainingTime.value.SetActive(true);
-			EndAction(true);
+
             		
 
 		}
 
 		//Called when the task is disabled.
 		protected override void OnStop() {
-            time.value = newTime;
         }
 
 		//Called when the task is paused.

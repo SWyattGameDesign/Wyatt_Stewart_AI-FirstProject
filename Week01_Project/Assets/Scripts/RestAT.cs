@@ -30,6 +30,7 @@ namespace NodeCanvas.Tasks.Actions {
 			stress.value -= Time.deltaTime;
 			if (stress.value <= 0f )
 			{
+				stress.value = 0f;
 				EndAction(true);
 			}
 		}
