@@ -1,5 +1,6 @@
 using NodeCanvas.Framework;
 using ParadoxNotion.Design;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 
@@ -11,6 +12,7 @@ namespace NodeCanvas.Tasks.Actions {
 		public BBParameter<float> energy;
 
 		public float rotateSpeed;
+		int currentWaypoint = 0;
 
 
 		public Transform[] waypoints;
@@ -31,27 +33,32 @@ namespace NodeCanvas.Tasks.Actions {
 		//Called once per frame while the action is active.
 		protected override void OnUpdate() {
 
-			for (int i = 0; i < waypoints.Length; i++) {
+			if (Vector3.Distance(waypoints[currentWaypoint].transform.position, agent.transform.position) < 0.5f) 
+			{
 
-				Vector3 directionToMove = waypoints[i].position - agent.transform.position;
+				currentWaypoint++;
 
-                Quaternion rotateTo = Quaternion.LookRotation(directionToMove, Vector3.up);
-
-				agent.transform.rotation = Quaternion.RotateTowards(agent.transform.rotation, rotateTo, rotateSpeed * Time.deltaTime);
-
-				agent.transform.position += directionToMove.normalized * speed.value * Time.deltaTime;
-
-				float distanceToTarget = directionToMove.magnitude;
-
-				if (distanceToTarget < 0.5f)
+				if (currentWaypoint >= waypoints.Length)
 				{
-						continue;
+					currentWaypoint = 0;
 				}
+            }
+
+				
+			Vector3 directionToMove = waypoints[currentWaypoint].transform.position - agent.transform.position;
+
+                
+			Quaternion rotateTo = Quaternion.LookRotation(directionToMove, Vector3.up);
+
+				
+			agent.transform.rotation = Quaternion.RotateTowards(agent.transform.rotation, rotateTo, rotateSpeed * Time.deltaTime);
+
+			agent.transform.position = Vector3.MoveTowards(agent.transform.position, waypoints[currentWaypoint].transform.position, Time.deltaTime * speed.value);
                 
 
 				
 					
-			}
+			
 
 		}
 
