@@ -15,7 +15,6 @@ namespace NodeCanvas.Tasks.Actions {
 		public LayerMask targetMask;
 		public float scanSpeed;
 
-
         //Use for initialization. This is called only once in the lifetime of the task.
         //Return null if init was successfull. Return an error string otherwise
         protected override string OnInit() {
@@ -32,6 +31,8 @@ namespace NodeCanvas.Tasks.Actions {
 
 		//Called once per frame while the action is active.
 		protected override void OnUpdate() {
+
+			GameObject closestPrey = null;
 			
 			DrawCircle(agent.transform.position, scanRadius, Color.red, 8); //visualize the scan radius
 
@@ -41,7 +42,7 @@ namespace NodeCanvas.Tasks.Actions {
 			foreach (Collider preyItem in prey)
 			{
 				GameObject preyObject = preyItem.gameObject;
-				GameObject closestPrey = null;
+				
 
 				if (preyObject == null)
 				{
@@ -58,7 +59,15 @@ namespace NodeCanvas.Tasks.Actions {
 						closestPrey = preyObject;
 					}
 				}
+
+				if (Vector3.Distance(preyObject.transform.position, agent.transform.position) < 20f )
+				{
+					EndAction(true);
+				}
 			}
+
+
+			
 
 		}
         private void DrawCircle(Vector3 center, float radius, Color colour, int numberOfPoints)

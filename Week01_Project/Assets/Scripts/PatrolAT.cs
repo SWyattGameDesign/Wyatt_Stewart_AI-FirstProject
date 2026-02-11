@@ -44,15 +44,14 @@ namespace NodeCanvas.Tasks.Actions {
 			agent.transform.position = Vector3.MoveTowards(agent.transform.position, waypoints.value[currentWaypoint.value].transform.position, Time.deltaTime * speed.value);
 
             if (Vector3.Distance(waypoints.value[currentWaypoint.value].transform.position, agent.transform.position) < 0.5f)
-            {
+			{ 
 
+                currentWaypoint.value++;
                 if (currentWaypoint.value >= waypoints.value.Length)
                 {
                     currentWaypoint = 0;
                 }
-
-                currentWaypoint.value++;
-				EndAction(true);
+                EndAction(true);
 
 
             }
