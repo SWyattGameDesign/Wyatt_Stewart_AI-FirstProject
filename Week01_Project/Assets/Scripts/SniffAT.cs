@@ -1,5 +1,6 @@
 using NodeCanvas.Framework;
 using ParadoxNotion.Design;
+using System;
 using UnityEngine;
 
 
@@ -14,6 +15,7 @@ namespace NodeCanvas.Tasks.Actions {
 		public float initialScanRadius;
 		public LayerMask targetMask;
 		public float scanSpeed;
+		private Collider[] prey;
 
         //Use for initialization. This is called only once in the lifetime of the task.
         //Return null if init was successfull. Return an error string otherwise
@@ -26,6 +28,7 @@ namespace NodeCanvas.Tasks.Actions {
 		//EndAction can be called from anywhere.
 		protected override void OnExecute() {
 
+			Array.Clear(prey, 0, prey.Length);
 			scanRadius = initialScanRadius; //make sure that the scan radius goes back to the default when this action task is reset.
 		}
 
@@ -38,7 +41,7 @@ namespace NodeCanvas.Tasks.Actions {
 
 			scanRadius += scanSpeed * Time.deltaTime;
 
-			Collider[] prey = Physics.OverlapSphere(agent.transform.position, scanRadius, targetMask); //set up a sphere that will expand and search out only objects on the "prey" layer
+			prey = Physics.OverlapSphere(agent.transform.position, scanRadius, targetMask); //set up a sphere that will expand and search out only objects on the "prey" layer
 			foreach (Collider preyItem in prey)
 			{
 				GameObject preyObject = preyItem.gameObject;
