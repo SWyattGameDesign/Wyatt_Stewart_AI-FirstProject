@@ -12,10 +12,10 @@ namespace NodeCanvas.Tasks.Actions {
 		public BBParameter<float> energy;
 
 		public float rotateSpeed;
-		int currentWaypoint = 0;
+		public BBParameter<int> currentWaypoint = 0;
 
 
-		public Transform[] waypoints;
+		public BBParameter<Transform[]> waypoints;
 
 		//Use for initialization. This is called only once in the lifetime of the task.
 		//Return null if init was successfull. Return an error string otherwise
@@ -33,19 +33,7 @@ namespace NodeCanvas.Tasks.Actions {
 		//Called once per frame while the action is active.
 		protected override void OnUpdate() {
 
-			if (Vector3.Distance(waypoints[currentWaypoint].transform.position, agent.transform.position) < 0.5f) 
-			{
-
-				currentWaypoint++;
-
-				if (currentWaypoint >= waypoints.Length)
-				{
-					currentWaypoint = 0;
-				}
-            }
-
-				
-			Vector3 directionToMove = waypoints[currentWaypoint].transform.position - agent.transform.position;
+			Vector3 directionToMove = waypoints.value[currentWaypoint.value].transform.position - agent.transform.position;
 
                 
 			Quaternion rotateTo = Quaternion.LookRotation(directionToMove, Vector3.up);
@@ -53,14 +41,28 @@ namespace NodeCanvas.Tasks.Actions {
 				
 			agent.transform.rotation = Quaternion.RotateTowards(agent.transform.rotation, rotateTo, rotateSpeed * Time.deltaTime);
 
-			agent.transform.position = Vector3.MoveTowards(agent.transform.position, waypoints[currentWaypoint].transform.position, Time.deltaTime * speed.value);
-                
+			agent.transform.position = Vector3.MoveTowards(agent.transform.position, waypoints.value[currentWaypoint.value].transform.position, Time.deltaTime * speed.value);
 
-				
-					
-			
+            if (Vector3.Distance(waypoints.value[currentWaypoint.value].transform.position, agent.transform.position) < 0.5f)
+            {
 
-		}
+                if (currentWaypoint.value >= waypoints.value.Length)
+                {
+                    currentWaypoint = 0;
+                }
+
+                currentWaypoint.value++;
+				EndAction(true);
+
+
+            }
+
+
+
+
+
+
+        }
 
 		//Called when the task is disabled.
 		protected override void OnStop() {
