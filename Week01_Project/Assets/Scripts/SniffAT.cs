@@ -17,6 +17,7 @@ namespace NodeCanvas.Tasks.Actions {
 		public float scanSpeed;
 		private Collider[] prey;
 		public BBParameter<Animator> animator;
+		public BBParameter<GameObject> preyObjectSet;
 		public BBParameter<bool> preyFound = false;
 
         //Use for initialization. This is called only once in the lifetime of the task.
@@ -55,20 +56,8 @@ namespace NodeCanvas.Tasks.Actions {
 				}
 				if(preyObject != null)
 				{
-					float startDistance = Mathf.Infinity;
-					float currentDistance = Vector3.Distance(preyObject.transform.position, agent.transform.position);
-					if (currentDistance < startDistance)
-					{
-						startDistance = currentDistance;
-						GameObject closestPrey = preyObject;
-						preyFound.value = true;
-                    }
-				}
-
-				if (Vector3.Distance(preyObject.transform.position, agent.transform.position) < 20f )
-				{
-					
-					EndAction(true);
+					preyObjectSet.value = preyItem.gameObject;
+					preyFound.value = true;
 				}
 			}
 

@@ -1,6 +1,7 @@
 using NodeCanvas.Framework;
 using ParadoxNotion.Design;
 using UnityEngine;
+using UnityEngine.AI;
 
 
 namespace NodeCanvas.Tasks.Actions {
@@ -9,13 +10,17 @@ namespace NodeCanvas.Tasks.Actions {
 
 		public AudioSource howl;
         public BBParameter<Animator> animator;
+		public BBParameter<float> speed;
 
 		private float cooldownTime = 8f;
 		private float actionTime = 0f;
 
+		private NavMeshAgent navAgent;
+
         //Use for initialization. This is called only once in the lifetime of the task.
         //Return null if init was successfull. Return an error string otherwise
         protected override string OnInit() {
+			navAgent = agent.GetComponent<NavMeshAgent>();
 			return null;
 		}
 
@@ -26,6 +31,7 @@ namespace NodeCanvas.Tasks.Actions {
             animator.value.SetBool("Howling", true);
 			howl.Play();
 			actionTime = 0f;
+			navAgent.speed = 0f;
 
 
 		}
@@ -45,6 +51,7 @@ namespace NodeCanvas.Tasks.Actions {
 		//Called when the task is disabled.
 		protected override void OnStop() {
             animator.value.SetBool("Howling", false);
+			navAgent.speed = speed.value;
         }
 
 		//Called when the task is paused.

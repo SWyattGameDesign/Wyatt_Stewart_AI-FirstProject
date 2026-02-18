@@ -1,17 +1,20 @@
 using NodeCanvas.Framework;
 using ParadoxNotion.Design;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
 
 namespace NodeCanvas.Tasks.Actions {
 
-	public class LayDownAT : ActionTask {
+	public class AttackAT : ActionTask {
 
-		public BBParameter<float> energy;
-		public float restValue;
-		public BBParameter<Animator> animator;
-		public BBParameter<float> speed;
+		public BBParameter<Transform> closestPrey;
+
+		public float jumpForce = 3f;
+		public float gravityScale = 1f;
+		private Vector3 velocity;
+		private float groundY = 0f;
 
 		private NavMeshAgent navAgent;
 
@@ -26,21 +29,26 @@ namespace NodeCanvas.Tasks.Actions {
 		//Call EndAction() to mark the action as finished, either in success or failure.
 		//EndAction can be called from anywhere.
 		protected override void OnExecute() {
-            if (energy.value <= 0f)
-            {
-                energy.value = 0f;
-            }
-
-			animator.value.SetBool("Resting", true);
-
-			navAgent.speed = 0f;
-        }
+			
+		}
 
 		//Called once per frame while the action is active.
 		protected override void OnUpdate() {
+            navAgent.SetDestination(closestPrey.value.position);
 
-			energy.value += restValue * Time.deltaTime;
-			if (energy.value >= 100f)
+
+            velocity.y += Physics.gravity.y * gravityScale * Time.deltaTime;
+
+			if (Vector3.Distance(closestPrey.value.transform.position, agent.transform.position) <= 1f)
+			{
+				velocity.y = jumpForce;
+				agent.transform.position += velocity * Time.deltaTime;
+				GameObject prey = closestPrey.value.gameObject;
+				prey.SetActive(false);
+				closestPrey.value = null;
+			}
+
+			if (closestPrey.value == null)
 			{
 				EndAction(true);
 			}
@@ -48,11 +56,8 @@ namespace NodeCanvas.Tasks.Actions {
 
 		//Called when the task is disabled.
 		protected override void OnStop() {
-
-            animator.value.SetBool("Resting", false);
-			navAgent.speed = speed.value;
-
-        }
+			
+		}
 
 		//Called when the task is paused.
 		protected override void OnPause() {
