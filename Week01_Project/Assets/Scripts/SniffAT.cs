@@ -16,6 +16,8 @@ namespace NodeCanvas.Tasks.Actions {
 		public LayerMask targetMask;
 		public float scanSpeed;
 		private Collider[] prey;
+		public BBParameter<Animator> animator;
+		public BBParameter<bool> preyFound = false;
 
         //Use for initialization. This is called only once in the lifetime of the task.
         //Return null if init was successfull. Return an error string otherwise
@@ -28,16 +30,15 @@ namespace NodeCanvas.Tasks.Actions {
 		//EndAction can be called from anywhere.
 		protected override void OnExecute() {
 
-			Array.Clear(prey, 0, prey.Length);
+            animator.value.SetBool("Sniff", true);
+            //Array.Clear(prey, 0, prey.Length);
 			scanRadius = initialScanRadius; //make sure that the scan radius goes back to the default when this action task is reset.
+			
 		}
 
 		//Called once per frame while the action is active.
 		protected override void OnUpdate() {
-
-			GameObject closestPrey = null;
-			
-			DrawCircle(agent.transform.position, scanRadius, Color.red, 8); //visualize the scan radius
+            DrawCircle(agent.transform.position, scanRadius, Color.red, 8); //visualize the scan radius
 
 			scanRadius += scanSpeed * Time.deltaTime;
 
@@ -59,12 +60,14 @@ namespace NodeCanvas.Tasks.Actions {
 					if (currentDistance < startDistance)
 					{
 						startDistance = currentDistance;
-						closestPrey = preyObject;
-					}
+						GameObject closestPrey = preyObject;
+						preyFound.value = true;
+                    }
 				}
 
 				if (Vector3.Distance(preyObject.transform.position, agent.transform.position) < 20f )
 				{
+					
 					EndAction(true);
 				}
 			}
@@ -92,6 +95,7 @@ namespace NodeCanvas.Tasks.Actions {
 
         //Called when the task is disabled.
         protected override void OnStop() {
+			animator.value.SetBool("Sniff", false);
 			
 		}
 

@@ -2,6 +2,7 @@ using NodeCanvas.Framework;
 using ParadoxNotion.Design;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+using UnityEngine.AI;
 
 
 namespace NodeCanvas.Tasks.Actions {
@@ -17,9 +18,12 @@ namespace NodeCanvas.Tasks.Actions {
 
 		public BBParameter<Transform[]> waypoints;
 
+		private NavMeshAgent navAgent;
+
 		//Use for initialization. This is called only once in the lifetime of the task.
 		//Return null if init was successfull. Return an error string otherwise
 		protected override string OnInit() {
+			navAgent = agent.GetComponent<NavMeshAgent>();
 			return null;
 		}
 
@@ -27,6 +31,8 @@ namespace NodeCanvas.Tasks.Actions {
 		//Call EndAction() to mark the action as finished, either in success or failure.
 		//EndAction can be called from anywhere.
 		protected override void OnExecute() {
+
+			navAgent.SetDestination(waypoints.value[currentWaypoint.value].position);
 			
 		}
 
@@ -37,28 +43,35 @@ namespace NodeCanvas.Tasks.Actions {
 
 			Vector3 directionToMove = waypoints.value[currentWaypoint.value].transform.position - agent.transform.position;
 
-                
-			Quaternion rotateTo = Quaternion.LookRotation(directionToMove, Vector3.up);
+
+
+			if (!navAgent.pathPending && navAgent.remainingDistance < 0.10f)
+			{
+				Quaternion rotateTo = Quaternion.LookRotation(directionToMove, Vector3.up);
+
+
+				agent.transform.rotation = Quaternion.RotateTowards(agent.transform.rotation, rotateTo, rotateSpeed * Time.deltaTime);
+
+				agent.transform.position = Vector3.MoveTowards(agent.transform.position, waypoints.value[currentWaypoint.value].transform.position, Time.deltaTime * speed.value);
+
+
+					
+				currentWaypoint.value++;
+					
+				if (currentWaypoint.value >= waypoints.value.Length)
+					
+				{
+						
+					currentWaypoint = 0;
+					
+				}
+					
+				EndAction(true);
+
 
 				
-			agent.transform.rotation = Quaternion.RotateTowards(agent.transform.rotation, rotateTo, rotateSpeed * Time.deltaTime);
 
-			agent.transform.position = Vector3.MoveTowards(agent.transform.position, waypoints.value[currentWaypoint.value].transform.position, Time.deltaTime * speed.value);
-
-            if (Vector3.Distance(waypoints.value[currentWaypoint.value].transform.position, agent.transform.position) < 0.5f)
-			{ 
-
-                currentWaypoint.value++;
-                if (currentWaypoint.value >= waypoints.value.Length)
-                {
-                    currentWaypoint = 0;
-                }
-                EndAction(true);
-
-
-            }
-
-
+			}
 
 
 

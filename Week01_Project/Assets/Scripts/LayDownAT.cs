@@ -1,6 +1,7 @@
 using NodeCanvas.Framework;
 using ParadoxNotion.Design;
 using UnityEngine;
+using UnityEngine.AI;
 
 
 namespace NodeCanvas.Tasks.Actions {
@@ -9,10 +10,14 @@ namespace NodeCanvas.Tasks.Actions {
 
 		public BBParameter<float> energy;
 		public float restValue;
+		public BBParameter<Animator> animator;
+
+		private NavMeshAgent navAgent;
 
 		//Use for initialization. This is called only once in the lifetime of the task.
 		//Return null if init was successfull. Return an error string otherwise
 		protected override string OnInit() {
+			navAgent = agent.GetComponent<NavMeshAgent>();
 			return null;
 		}
 
@@ -24,6 +29,10 @@ namespace NodeCanvas.Tasks.Actions {
             {
                 energy.value = 0f;
             }
+
+			animator.value.SetBool("Resting", true);
+
+			navAgent.speed = 0f;
         }
 
 		//Called once per frame while the action is active.
@@ -38,8 +47,11 @@ namespace NodeCanvas.Tasks.Actions {
 
 		//Called when the task is disabled.
 		protected override void OnStop() {
-			
-		}
+
+            animator.value.SetBool("Resting", false);
+			navAgent.speed = 5f;
+
+        }
 
 		//Called when the task is paused.
 		protected override void OnPause() {
